@@ -19,6 +19,6 @@ fn main() {
         .current_dir("..".to_owned())
         .build()
         .unwrap();
-
+    
     assert_eq!(command.executable, "cargo");
 }

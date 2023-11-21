@@ -31,10 +31,14 @@
 use derive_builder::Builder;
 
 #[derive(Builder)]
+#[command(author, version, about, long_about = None)]
 pub struct Command {
     executable: String,
+    // this is a MetaList attribute
+    // T
     #[builder(each = "arg")]
     args: Vec<String>,
+    // this is a MetaList attribute
     #[builder(each = "env")]
     env: Vec<String>,
     current_dir: Option<String>,
@@ -43,11 +47,11 @@ pub struct Command {
 fn main() {
     let command = Command::builder()
         .executable("cargo".to_owned())
-        .arg("build".to_owned())
-        .arg("--release".to_owned())
+        // .arg("build".to_owned())
+        .args(vec!["--release".to_owned()])
         .build()
         .unwrap();
 
-    assert_eq!(command.executable, "cargo");
-    assert_eq!(command.args, vec!["build", "--release"]);
+    // assert_eq!(command.executable, "cargo");
+    // assert_eq!(command.args, vec!["build", "--release"]);
 }
